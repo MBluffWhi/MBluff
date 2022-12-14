@@ -1,0 +1,14 @@
+clear all;close all;clc;
+x=reshape(1:20,20,1);
+y=5*x+rand(20,1);
+y(20)=y(20)+60;
+y(3)=y(2);
+% w=ones(10,1);
+% w(9)=0.1;
+p=polyfit(x,y,1);
+y1=polyval(p,x);
+% [a,b,c,sigma,~]=weightedLS(w,x,y);
+[a,b,c]=M_estimation(x,y,9,6,10^-3);
+y2=(-c-a*x)/b;
+figure,plot(x,y1,'g-',x,y2,'r-',x,y,'*');
+legend('最小二乘法','M估计法');
